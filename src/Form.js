@@ -1,4 +1,4 @@
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 // 1. Dodanie podstawowego markupu
@@ -14,13 +14,19 @@ const initialValues = {
 
 const userValidationSchema = Yup.object().shape({
   nameSurname: Yup.string().required("Pole wymagane"),
+  email: Yup.string()
+    .required("wpisuj email")
+    .matches(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      "niepoprawny email"
+    ),
 });
 
 export const FormikForm = () => {
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={(values) => console.log(values)}
+      onSubmit={() => alert("Formularz wysłany!")}
       validationSchema={userValidationSchema}
     >
       {(values) => {
@@ -29,11 +35,13 @@ export const FormikForm = () => {
           <Form>
             <div>
               <label htmlFor="nameSurname">Imię i Nazwisko</label>
-              <Field type="text" id="nameSurname" />
+              <Field type="text" id="nameSurname" value={values.nameSurname} />
+              <ErrorMessage name="nameSurname" />
             </div>
             <div>
               <label htmlFor="email">E-mail</label>
               <Field type="text" id="email" value={values.email} />
+              <ErrorMessage name="email" />
             </div>
             <div>
               <label htmlFor="gender">Płeć</label>
