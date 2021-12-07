@@ -2,12 +2,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "../src/form.css";
 
-// 1. Dodanie podstawowego markupu
-// 2. Initial values w console.logu
-// 2a.  Pokazanie formularza przed dodaniem values i po
-// 3 yup + validation schema
-// 4 - Error message i jak pokoloraowac - children prop
-
 const initialValues = {
   nameSurname: "",
   email: "",
@@ -28,20 +22,19 @@ export const FormikForm = () => {
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={() => alert("Formularz wysłany!")}
       validationSchema={userValidationSchema}
+      onSubmit={(values) => console.log(values)}
     >
-      {(values) => {
-        console.log(values);
+      {(props) => {
         return (
-          <Form className="container-xs">
+          <Form>
             <div>
               <label htmlFor="nameSurname">Imię i Nazwisko</label>
               <Field
                 type="text"
                 id="nameSurname"
-                value={values.nameSurname}
                 className="form-control"
+                value={props.values.nameSurname}
               />
               <ErrorMessage name="nameSurname">
                 {(msg) => <div className="text-danger">{msg}</div>}
@@ -52,9 +45,10 @@ export const FormikForm = () => {
               <Field
                 type="text"
                 id="email"
-                value={values.email}
                 className="form-control"
+                value={props.values.email}
               />
+
               <ErrorMessage name="email" className="text-danger">
                 {(msg) => <div className="text-danger">{msg}</div>}
               </ErrorMessage>
