@@ -1,6 +1,8 @@
 # Budowanie Formularza z Yup + Formik
 
-## W tym repo znajdziesz prosty przykład pokazujący jak można zbudować formularz kontaktowy przy pomocy Formika oraz podstawową walidację z biblioteką Yup.
+## Zawartość repo
+
+W tym repo znajdziesz prosty przykład pokazujący jak można zbudować formularz kontaktowy przy pomocy Formika oraz podstawową walidację z biblioteką Yup.
 
 ## Setup
 
